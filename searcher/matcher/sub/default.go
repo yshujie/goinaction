@@ -1,6 +1,8 @@
 package sub
 
 import (
+	"log"
+
 	d "github.com/yshujie/goinaction/searcher/data"
 	m "github.com/yshujie/goinaction/searcher/matcher"
 )
@@ -10,6 +12,8 @@ type defaultMatcher struct{}
 
 // init 函数，注册 rss matcher
 func init() {
+	log.Println("in default matcher init")
+
 	var matcher defaultMatcher
 	m.Register("default", matcher)
 }

@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 	"regexp"
 
@@ -16,6 +17,8 @@ type rssMatcher struct{}
 
 // init 函数，注册 rss matcher
 func init() {
+	log.Println("in rss matcher init")
+
 	var matcher rssMatcher
 	m.Register("rss", matcher)
 }

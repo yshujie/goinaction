@@ -9,7 +9,7 @@ import (
 
 // init 函数在 main 函数调用前执行
 func init() {
-	log.Fatalln("in seatcher init")
+	log.Println("in seatcher init")
 
 	// 记录日志
 	log.SetOutput(os.Stdout)
@@ -17,7 +17,7 @@ func init() {
 
 // main 函数，程序入口
 func main() {
-	log.Fatalln("in searcher main")
+	log.Println("in searcher main")
 
 	// preform the search for the specified term
 	Search("president")
