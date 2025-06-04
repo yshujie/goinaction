@@ -10,9 +10,9 @@ const dataFile = "data/data.json"
 
 // Feed 需要处理的数据源结构
 type Feed struct {
-	Name string
-	URI  string
-	Type string
+	Name string `json:"site"`
+	URI  string `json:"link"`
+	Type string `json:"type"`
 }
 
 // RetrieveFeeds 读取并返回源数据
