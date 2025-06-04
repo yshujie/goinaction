@@ -1,4 +1,4 @@
-package searcher
+package main
 
 import (
 	"log"
@@ -8,8 +8,8 @@ import (
 	m "github.com/yshujie/goinaction/searcher/matcher"
 )
 
-// run 函数，执行搜索功能
-func run(seatchTerm string) {
+// seatch 函数，执行搜索功能
+func Search(seatchTerm string) {
 	// 拉取数据源
 	feeds, err := d.RetrieveFeeds()
 	if err != nil {

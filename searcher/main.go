@@ -1,4 +1,4 @@
-package searcher
+package main
 
 import (
 	"log"
@@ -20,6 +20,5 @@ func main() {
 	log.Fatalln("in searcher main")
 
 	// preform the search for the specified term
-	run("president")
-
+	Search("president")
 }
