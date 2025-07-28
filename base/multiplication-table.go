@@ -52,3 +52,26 @@ func PrintMultiplicationTable3(n int) {
 		fmt.Println()
 	}
 }
+
+/*
+*
+输出九九乘法表（倒三角）
+func PrintReverseMultiplicationTable(n int)
+
+打印如下格式的倒三角乘法表（n=3）：
+1*3=3 2*3=6 3*3=9
+1*2=2 2*2=4
+1*1=1
+*/
+func PrintReverseMultiplicationTable(n int) {
+
+	// 外层循环，控制行
+	for row := n; row >= 1; row-- {
+		// 内存循环，控制列
+		for col := 1; col <= row; col++ {
+			fmt.Printf("%d*%d=%-2d  ", col, row, col*row)
+		}
+
+		fmt.Println()
+	}
+}
