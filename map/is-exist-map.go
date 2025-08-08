@@ -1,9 +1,9 @@
-package base
+package map_test
 
 import "fmt"
 
 /**
-✅ 题目二：map 键存在性判断
+✅ 题目：map 键存在性判断
 
 m := map[string]int{
 	"apple":  5,

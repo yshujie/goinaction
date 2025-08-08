@@ -1,9 +1,9 @@
-package base
+package slice_test
 
 import "fmt"
 
 /**
-✅ 题目一：切片扩容陷阱题（共享 or 非共享）
+✅ 题目：切片扩容陷阱题（共享 or 非共享）
 
 a := []int{1, 2, 3}
 b := a[:2]

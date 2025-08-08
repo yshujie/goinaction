@@ -1,8 +1,8 @@
-package base
+package string_test
 
 /*
 *
-✅ 题目 2：反转字符串
+✅ 题目：反转字符串
 编写函数 ReverseString(s string) string，使用 for 循环将字符串反转并返回。
 
 输入示例：

@@ -1,12 +1,11 @@
-package base
+package array_test
 
 import (
 	"fmt"
-	"reflect"
 )
 
 /**
-✅ 题目三：数组值传递与引用语义对比
+✅ 题目：数组值传递与引用语义对比
 
 func modifyArray(arr [3]int) {
 	arr[0] = 100
@@ -27,6 +26,10 @@ fmt.Println("s:", s)
 
 ❓问：
 为什么 a[0] 没有变，而 s[0] 变了？
+*/
+
+/**
+答：
 
 在 go 语言中，所有的函数参数都是值传递。
 也就是说，在调用 modifyArray(a) 时，是将数组 a copy 了一份，传入 modifyArray() 函数内部，
@@ -47,29 +50,22 @@ func modifySlice(s []int) {
 此时 s[0] = 100 只更改函数内部切片的值，而不会影响函数外部的切片
 */
 
-// NewArray 创建数组
-func NewArray() {
-	defer fmt.Println()
+func modifyArray(arr [3]int) {
+	arr[0] = 100
+}
 
-	// 仅声明 不初始化，此时 go 运行时会给 a0 开辟内存空间，并给每个元素赋“类型零值”
-	var a01 [6]int
-	var a02 [5]string
-	var a03 [5]bool
-	fmt.Printf("a01 type: %T; a01 value: %v \n", a01, a01)
-	fmt.Printf("a02 type: %T; a02 value: %v \n", a02, a02)
-	fmt.Printf("a03 type: %T; a03 value: %v \n", a03, a03)
+func modifySlice(s []int) {
+	s[0] = 100
+}
 
-	// 声明+初始化方式创建数组
-	// a10 := [5]int{}
-	a10 := [5]int{1, 2, 3, 4, 5}
-	a10[0] = 10
+// 值传递和引用传递对比
+func ValuePassingVsReferenceSemantics() {
+	a := [3]int{1, 2, 3}
+	s := []int{1, 2, 3}
 
-	fmt.Printf("a10 type: %T; a10 value: %v \n", a10, a10)
+	modifyArray(a)
+	modifySlice(s)
 
-	a2 := new([5]int)
-	fmt.Printf("a2 type: %T; a2 value: %v \n", a2, a2)
-
-	reflect.TypeOf(a01)
-	fmt.Printf("reflect.TypeOf(a01) == reflect.TypeOf(a10): %v \n", reflect.TypeOf(a01) == reflect.TypeOf(a10))
-	// fmt.Printf("a01 == a10: %v \n", a01 == a10)
+	fmt.Println("a:", a)
+	fmt.Println("s:", s)
 }

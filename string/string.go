@@ -1,4 +1,4 @@
-package base
+package string_test
 
 import (
 	"fmt"
