@@ -2,6 +2,8 @@ package base
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
 	"unicode"
 )
 
@@ -42,10 +44,45 @@ func CountChart(s string) {
 		}
 	}
 
-	fmt.Print(" map[char]int ->")
+	fmt.Print("map[char]int -> ")
 	// 打印每个字符出现的次数
 	for _, v := range chartSet {
 		fmt.Printf("%c:%d, ", v, chartMap[v])
 	}
 	fmt.Println()
+}
+
+// 统计字符串中每个字符出现的次数，忽略大小写，按字符首次出现顺序打印
+func CountCharOrdered(s string) {
+	// 用于存储字符计数
+	countMap := make(map[rune]int)
+
+	// 统计字符出现次数
+	for _, r := range s {
+		lower := unicode.ToLower(r)
+		countMap[lower]++
+	}
+
+	// 记录已打印字符
+	seen := make(map[rune]bool)
+	// 字符串构造器
+	var builder strings.Builder
+
+	builder.WriteString("map[char]int -> ")
+	for _, r := range s {
+		lower := unicode.ToLower(r)
+
+		if !seen[lower] {
+			seen[lower] = true
+			builder.WriteRune(lower)
+			builder.WriteString(":")
+			builder.WriteString(strconv.Itoa(countMap[lower]))
+			builder.WriteString(", ")
+		}
+	}
+
+	str := builder.String()
+	str = str[:len(str)-2]
+
+	fmt.Println(str)
 }
