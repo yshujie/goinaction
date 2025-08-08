@@ -12,3 +12,13 @@ package array_test
 	•	顺序遍历 + 相邻元素比较
 	•	边界情况（空数组、单元素）
 */
+
+func IsIncreasing(a []int) bool {
+	for i := 1; i <= len(a)-1; i++ {
+		if a[i] < a[i-1] {
+			return false
+		}
+	}
+
+	return true
+}
