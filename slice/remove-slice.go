@@ -13,3 +13,37 @@ package slice_test
 	•	遍历时的写入覆盖技巧
 	•	不额外开辟新切片
 */
+
+/**
+思路：
+- 使用 读写双指针 + 原地更新法
+- 从左向右遍历切片，判断每一个元素是否为值得值 val
+	若是，则跳过当前值
+	若不是，则写入读取的值，并更新写入指针
+*/
+
+func RemoveSilceValue[T comparable](s []T, val T) []T {
+	if len(s) == 0 {
+		return s
+	}
+
+	// 写指针
+	w := 0
+
+	// 读取切片元素
+	for _, currVal := range s {
+		// 遇到需要被过滤的值，则遗弃
+		if currVal == val {
+			continue
+		}
+
+		// 非过滤值，则写入切片，更新写指针进度
+		s[w] = currVal
+		w++
+	}
+
+	// 切片尾部更新，优化 GC
+	clear(s[w:])
+
+	return s[:w:w]
+}
