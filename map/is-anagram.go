@@ -26,7 +26,7 @@ func isAnagram(s1, s2 string) bool {
 	if s1 == s2 {
 		return false
 	}
-	if len(s1) != len(s2) {
+	if len([]rune(s1)) != len([]rune(s2)) {
 		return false
 	}
 
