@@ -25,11 +25,11 @@ func Intersection(numss ...[]int) (result []int) {
 	// 创建统计表
 	cntTable := make(map[int]int)
 	for _, nums := range numss {
-		tmpTable := make(map[int]int)
+		tmpTable := make(map[int]struct{})
 		for _, num := range nums {
 			// 第一次出现某个元素，则记录该元素出现
 			if _, ok := tmpTable[num]; !ok {
-				tmpTable[num]++
+				tmpTable[num] = struct{}{}
 				cntTable[num]++
 			}
 		}
