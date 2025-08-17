@@ -1,5 +1,11 @@
 package array_test
 
+import (
+	"errors"
+	"math"
+	"strconv"
+)
+
 /**
 ✅ 题目：查找数组中第二大的元素
 实现一个函数，返回数组中第二大的数字（要求一次遍历完成）。
@@ -13,25 +19,34 @@ package array_test
 	•	边界值判断（数组长度 < 2）
 */
 
-func FindSecondItem(a []int) int {
+/**
+思考：
+- 要寻找第二大的，则需要记录 第一大、第二大 两个
+- 遍历时，要从头到尾遍历一遍，没办法减少遍历个数
+- 边界思考：
+- 若 len(a) <= 1，则没有第二大的元素
+*/
+
+func FindSecondItem(a []int) (int, error) {
 	if len(a) <= 1 {
-		return 0
+		return 0, errors.New("数组只有" + strconv.Itoa(len(a)) + "个元素，无法定位第二大的元素")
 	}
 
-	// 将初始值设为第一个元素
-	max1, max2 := a[0], a[0]
+	// 使用 math.MinInt 初始化 max1， max2
+	max1, max2 := math.MinInt, math.MinInt
 
-	// 从第二个元素开始遍历
-	for _, v := range a[1:] {
-		if v > max1 { // 发现比 max1 更大的元素，则更新 max1，并将原 max1 设置为 max2
+	for i := 2; i <= len(a)-1; i++ {
+		if a[i] > max1 { // 找到最大值元素，则将当前最大值赋予第二大值，并更新最大值
 			max2 = max1
-			max1 = v
-		} else if max1 > v && max2 == a[0] { // 发现元素比 max1 小，且 max2 为初始值时，则设置为 max2
-			max2 = v
-		} else if max1 > v && v > max2 { // 发现元素比 max1 小，且比 max2 大，则设置为第二大值
-			max2 = v
+			max1 = a[i]
+		} else if a[i] < max1 && a[i] > max2 { // 找到比最大值小，还比第二大值大的元素，则更新第二大值
+			max2 = a[i]
 		}
 	}
 
-	return max2
+	if max2 == math.MinInt {
+		return 0, errors.New("数组中没有第二大的元素（所有元素相等）")
+	}
+
+	return max2, nil
 }
