@@ -22,24 +22,22 @@ package map_test
 	3. 若满足字符串不相等、字符串长度相同、字符出现的频率相同，则说明是字母异位词
 */
 
-func isAnagram(s1, s2 string) bool {
-	if s1 == s2 {
-		return false
-	}
-	if len([]rune(s1)) != len([]rune(s2)) {
+func IsAnagram(s1, s2 string) bool {
+	if s1 == s2 || len(s1) != len(s2) {
 		return false
 	}
 
-	// 字符统计表，s1 累加，s2 累减
-	freq := make(map[rune]int)
-	for _, v := range s1 {
-		freq[v]++
-	}
-	for _, v := range s2 {
-		freq[v]--
+	m := map[rune]int{}
 
-		// 若该字符的次数小于 0，则说明 s1 中未累加，则直接判定“非字母异位词”
-		if freq[v] < 0 {
+	for _, letter := range s1 {
+		m[letter]++
+	}
+	for _, letter := range s2 {
+		m[letter]--
+	}
+
+	for _, cnt := range m {
+		if cnt != 0 {
 			return false
 		}
 	}

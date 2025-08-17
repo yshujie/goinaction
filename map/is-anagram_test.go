@@ -165,9 +165,9 @@ func TestIsAnagram(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := isAnagram(tt.s1, tt.s2)
+			result := IsAnagram(tt.s1, tt.s2)
 			if result != tt.expected {
-				t.Errorf("isAnagram(%q, %q) = %v, want %v", tt.s1, tt.s2, result, tt.expected)
+				t.Errorf("IsAnagram(%q, %q) = %v, want %v", tt.s1, tt.s2, result, tt.expected)
 			}
 		})
 	}
@@ -179,31 +179,31 @@ func BenchmarkIsAnagram(b *testing.B) {
 	s2 := "zyxwvutsrqponmlkjihgfedcba"
 
 	for i := 0; i < b.N; i++ {
-		isAnagram(s1, s2)
+		IsAnagram(s1, s2)
 	}
 }
 
 // 测试大输入的性能
 func TestIsAnagramLargeInput(t *testing.T) {
 	// 创建两个大字符串
-	s1 := ""
-	s2 := ""
+	s1 := "abcdefghijklmnopqrstuvwxyz"
+	s2 := "zyxwvutsrqponmlkjihgfedcba"
 
-	// 生成包含1000个字符的字符串
-	for i := 0; i < 1000; i++ {
-		s1 += string(rune('a' + (i % 26)))
-		s2 += string(rune('z' - (i % 26)))
+	// 重复这个模式来创建大字符串
+	for i := 0; i < 38; i++ { // 38 * 26 = 988 字符
+		s1 += "abcdefghijklmnopqrstuvwxyz"
+		s2 += "zyxwvutsrqponmlkjihgfedcba"
 	}
 
 	// 这两个字符串应该是异位词
-	result := isAnagram(s1, s2)
+	result := IsAnagram(s1, s2)
 	if !result {
 		t.Errorf("大输入测试失败: 期望 true，得到 %v", result)
 	}
 
 	// 测试不是异位词的情况
 	s2 = s1[:len(s1)-1] + "x" // 修改最后一个字符
-	result = isAnagram(s1, s2)
+	result = IsAnagram(s1, s2)
 	if result {
 		t.Errorf("大输入测试失败: 期望 false，得到 %v", result)
 	}
@@ -212,15 +212,16 @@ func TestIsAnagramLargeInput(t *testing.T) {
 // 测试边界情况
 func TestIsAnagramEdgeCases(t *testing.T) {
 	// 测试非常长的字符串
-	longStr1 := ""
-	longStr2 := ""
+	longStr1 := "abcdefghijklmnopqrstuvwxyz"
+	longStr2 := "zyxwvutsrqponmlkjihgfedcba"
 
-	for i := 0; i < 10000; i++ {
-		longStr1 += string(rune('a' + (i % 26)))
-		longStr2 += string(rune('z' - (i % 26)))
+	// 重复这个模式来创建长字符串
+	for i := 0; i < 384; i++ { // 384 * 26 = 9984 字符
+		longStr1 += "abcdefghijklmnopqrstuvwxyz"
+		longStr2 += "zyxwvutsrqponmlkjihgfedcba"
 	}
 
-	result := isAnagram(longStr1, longStr2)
+	result := IsAnagram(longStr1, longStr2)
 	if !result {
 		t.Errorf("长字符串测试失败: 期望 true，得到 %v", result)
 	}
@@ -234,7 +235,7 @@ func TestIsAnagramEdgeCases(t *testing.T) {
 		repeatStr2 += "a"
 	}
 
-	result = isAnagram(repeatStr1, repeatStr2)
+	result = IsAnagram(repeatStr1, repeatStr2)
 	if result {
 		t.Errorf("重复字符测试失败: 期望 false（相同字符串），得到 %v", result)
 	}
@@ -254,12 +255,12 @@ func TestIsAnagramSymmetry(t *testing.T) {
 
 	for _, tc := range testCases {
 		// 测试 s1 和 s2
-		result1 := isAnagram(tc.s1, tc.s2)
+		result1 := IsAnagram(tc.s1, tc.s2)
 		// 测试 s2 和 s1（应该得到相同结果）
-		result2 := isAnagram(tc.s2, tc.s1)
+		result2 := IsAnagram(tc.s2, tc.s1)
 
 		if result1 != result2 {
-			t.Errorf("对称性测试失败: isAnagram(%q, %q) = %v, isAnagram(%q, %q) = %v",
+			t.Errorf("对称性测试失败: IsAnagram(%q, %q) = %v, IsAnagram(%q, %q) = %v",
 				tc.s1, tc.s2, result1, tc.s2, tc.s1, result2)
 		}
 	}
