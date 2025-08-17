@@ -35,7 +35,7 @@ func FindSecondItem(a []int) (int, error) {
 	// 使用 math.MinInt 初始化 max1， max2
 	max1, max2 := math.MinInt, math.MinInt
 
-	for i := 2; i <= len(a)-1; i++ {
+	for i := 0; i <= len(a)-1; i++ {
 		if a[i] > max1 { // 找到最大值元素，则将当前最大值赋予第二大值，并更新最大值
 			max2 = max1
 			max1 = a[i]
