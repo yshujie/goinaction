@@ -21,7 +21,7 @@ func reverse(arr *[N]int)
   (*arr)[i], (*arr)[j] = (*arr)[j], (*arr)[i]
 */
 
-func Reverse(a *[5]int) {
+func Reverse(a []int) {
 	for i, j := 0, len(a)-1; i < j; i, j = i+1, j-1 {
 		a[j], a[i] = a[i], a[j]
 	}
